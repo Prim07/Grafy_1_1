@@ -16,6 +16,10 @@
                 <TextBlock Text="Z prawdopodobieństwem&#xA;wystąpienia krawędzi (0 - 100%):" Width="184"/>
                 <TextBox x:Name="Probability_Of_Edge_Occurence" Width="66" Height="20" PreviewTextInput="Num_of_V_PreviewTextInput" Text="60"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="18,10,0,20">
+                <TextBlock Text="Ilość wierzchołków:" Width="184"/>
+                <TextBox x:Name="Number_Of_Vertex" Width="66" Height="20" Text="10"/>
+            </StackPanel>
             <Button Content="Losuj Graf G(n, l)" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Height="40" Click="Button_Click_1" />
             <StackPanel Orientation="Horizontal" Margin="18,10,0,0">
                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="Z liczbą wierzchołków: " Width="120" Height="15"/>
@@ -36,15 +40,21 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="700" Height="220" Canvas.Top="508" Canvas.Left="3">
-            <StackPanel Name="StackPanelForDisplayingAdjacencyMatrix" Background="LightGoldenrodYellow" Width="230">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="232" HorizontalAlignment="Left">
+                <StackPanel Name="StackPanelForDisplayingAdjacencyMatrix" Background="LightGoldenrodYellow" Width="230">
                 
-            </StackPanel>
-            <StackPanel Name="StackPanelForDisplayingIncidenceMatrix" Background="LightGoldenrodYellow" Width="230" Margin="5,0,5,0">
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="232" HorizontalAlignment="Left" Margin="6,0,6,0">
+                <StackPanel Name="StackPanelForDisplayingIncidenceMatrix" Background="LightGoldenrodYellow" Width="230" Margin="5,0,5,0">
 
-            </StackPanel>
-            <StackPanel Name="StackPanelForDisplayingAdjacencylist" Background="LightGoldenrodYellow" Width="230">
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="232" HorizontalAlignment="Left">
+                <StackPanel Name="StackPanelForDisplayingAdjacencylist" Background="LightGoldenrodYellow" Width="230">
 
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
 
     </Canvas>
