@@ -22,6 +22,8 @@ namespace Grafy_1_1
     public partial class MainWindow : Window
     {
         
+        //komentarz Pauli
+
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
         public List<ComboBox> ListOfComboBoxes;
