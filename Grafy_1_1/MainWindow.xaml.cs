@@ -22,7 +22,6 @@ namespace Grafy_1_1
     public partial class MainWindow : Window
     {
         
-
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
         public List<ComboBox> ListOfComboBoxes;
@@ -45,9 +44,6 @@ namespace Grafy_1_1
 
                 Random r = new Random();
                 int v = Int32.Parse(Number_Of_Vertex.Text);
-                
-
-                //int n = r.Next(1, 10);
 
                 AdjacencyMatrix adjacencyMatrix = new AdjacencyMatrix(v);
 
