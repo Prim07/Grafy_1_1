@@ -22,7 +22,7 @@ namespace Grafy_1_1
     public partial class MainWindow : Window
     {
 
-        //Komentarz testujący gita
+        //Komentarz testujący gita 2
         
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
