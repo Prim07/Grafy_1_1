@@ -21,7 +21,7 @@ namespace Grafy_1_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        //kocham dupska 12
+        //kocham dupska 12 - ja też ;)
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
         public List<ComboBox> ListOfComboBoxes;
