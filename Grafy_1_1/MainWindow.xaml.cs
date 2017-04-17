@@ -23,6 +23,7 @@ namespace Grafy_1_1
     {
 
         //Komentarz testujący gita 2
+        // Komentarz testujący pobieranie
         
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
