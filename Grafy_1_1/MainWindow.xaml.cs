@@ -21,9 +21,7 @@ namespace Grafy_1_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        //komentarz Pauli i Artura 2
-
+        //kocham dupska 12
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
         public List<ComboBox> ListOfComboBoxes;
@@ -45,14 +43,13 @@ namespace Grafy_1_1
                 StackPanelWithConnections.Children.Clear();
 
                 Random r = new Random();
+                int v = Int32.Parse(Number_Of_Vertex.Text);
 
-                int n = r.Next(1, 10);
+                AdjacencyMatrix adjacencyMatrix = new AdjacencyMatrix(v);
 
-                AdjacencyMatrix adjacencyMatrix = new AdjacencyMatrix(n);
-
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < v; i++)
                 {
-                    for (int j = i + 1; j < n; j++)
+                    for (int j = i + 1; j < v; j++)
                     {
                         int probability = r.Next(0, 100);
 
@@ -283,5 +280,12 @@ namespace Grafy_1_1
             e.Handled = regex.IsMatch(e.Text);
         }
 
+
+        // Rowniez sprawdza Num_of_E, nie tylko Num_of_V
+        private void V_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }
