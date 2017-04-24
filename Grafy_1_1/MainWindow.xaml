@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Grafy_1_1"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1024">
-    <Canvas>
+    <Canvas Name="MainCanvas">
         <Canvas Name="MyCanvas" Background="LightCyan" Height="425" Width="700" Canvas.Left="3" Canvas.Top="10">
 
         </Canvas>
@@ -44,21 +44,23 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="700" Height="226" Canvas.Top="440" Canvas.Left="3">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="230" HorizontalAlignment="Left">
-                <StackPanel Name="StackPanelForDisplayingAdjacencyMatrix" Background="LightGoldenrodYellow" Width="230">
+                <StackPanel Name="StackPanelForDisplayingAdjacencyMatrix" Background="LightGoldenrodYellow" Width="230" MouseLeftButtonUp="StackPanelForDisplayingAdjacencyMatrix_MouseLeftButtonUp">
 
                 </StackPanel>
             </ScrollViewer>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="230" HorizontalAlignment="Left" Margin="10,0,10,0" Height="226" VerticalAlignment="Bottom">
-                <StackPanel Name="StackPanelForDisplayingIncidenceMatrix" Background="LightGoldenrodYellow" Width="230">
+                <StackPanel Name="StackPanelForDisplayingIncidenceMatrix" Background="LightGoldenrodYellow" Width="230" MouseLeftButtonUp="StackPanelForDisplayingIncidenceMatrix_MouseLeftButtonUp">
 
                 </StackPanel>
             </ScrollViewer>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="230" HorizontalAlignment="Left">
-                <StackPanel Name="StackPanelForDisplayingAdjacencylist" Background="LightGoldenrodYellow" Width="230" >
+                <StackPanel Name="StackPanelForDisplayingAdjacencylist" Background="LightGoldenrodYellow" Width="230" MouseLeftButtonUp="StackPanelForDisplayingAdjacencylist_MouseLeftButtonUp" >
 
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
-
+        <ScrollViewer Visibility="Hidden" HorizontalAlignment="Left" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="PreviewScrollViewer" Width="1017" Height="671">
+            <StackPanel Visibility="Hidden" Name="StackPanelForPreview" Background="Wheat" Height="661" Width="1017" Canvas.Left="3" MouseLeftButtonUp="StackPanelForPreview_MouseLeftButtonUp" />
+        </ScrollViewer>
     </Canvas>
 </Window>

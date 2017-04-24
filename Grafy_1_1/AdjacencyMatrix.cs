@@ -13,6 +13,7 @@ namespace Grafy_1_1
     {
         // Brzydkoszybka enkapsulacja
         public int[,] AdjacencyArray;
+        private IncidenceMatrix incidenceMatrix;
 
         // Konstruktor
         public AdjacencyMatrix(int n)
@@ -50,13 +51,15 @@ namespace Grafy_1_1
             TextBlock myBlock = new TextBlock();
             myBlock.Text = myString;
             myBlock.FontSize = 16;
+            myBlock.FontFamily = new FontFamily("Lucida Console");
             StackPanelForDisplayingAdjacencyMatrix.Children.Add(myBlock);
 
             DrawGraph(AdjacencyArray.GetLength(0), MyCanvas);
 
             // Nowa maceirz incydencji
-            IncidenceMatrix incidenceMatix = new IncidenceMatrix(this);
-            incidenceMatix.Display(StackPanelForDisplayingIncidenceMatrix, StackPanelForDisplayingAdjacencylist);
+            incidenceMatrix = new IncidenceMatrix(this);
+            incidenceMatrix.Display(StackPanelForDisplayingIncidenceMatrix, StackPanelForDisplayingAdjacencylist);
+
         }
 
         // Wizualizacja grafu na macierzy
@@ -132,6 +135,53 @@ namespace Grafy_1_1
                 MyCanvas.Children.Add(smallPointNumber);
 
             }
+        }
+
+        //Podgląd m. sasiedztwa
+        public void Preview(StackPanel StackPanelForPreview)
+        {
+            StackPanelForPreview.Children.Clear();
+
+            string myString = "";
+
+            for (int i = 0; i < AdjacencyArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < AdjacencyArray.GetLength(1); j++)
+                {
+                    myString += AdjacencyArray[i, j].ToString() + "  ";
+                }
+                myString += "\n";
+            }
+
+            TextBlock titleBlock = new TextBlock();
+            titleBlock.Text = "Macierz sąsiedztwa";
+            titleBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            titleBlock.FontSize = 48;
+            titleBlock.FontFamily = new FontFamily("Times New Roman");
+            titleBlock.Margin = new System.Windows.Thickness(0, 20, 0, 50);
+            StackPanelForPreview.Children.Add(titleBlock);
+
+            TextBlock myBlock = new TextBlock();
+            myBlock.Text = myString;
+            myBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            myBlock.FontSize = 16;
+            myBlock.FontFamily = new FontFamily("Lucida Console");
+            StackPanelForPreview.Children.Add(myBlock);
+
+            StackPanelForPreview.Height = titleBlock.Height + myBlock.Height;
+            StackPanelForPreview.Width = titleBlock.Width + myBlock.Width;
+        }
+
+        //Podgląd m. incydencji
+        internal void PreviewIncidence(StackPanel stackPanelForPreview)
+        {
+            incidenceMatrix.Preview(stackPanelForPreview);
+        }
+
+        //Podgląd listy
+        internal void PreviewAdjacencyList(StackPanel stackPanelForPreview)
+        {
+            incidenceMatrix.PreviewAdjacencyList(stackPanelForPreview);
         }
     }
 }

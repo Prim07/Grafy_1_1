@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Grafy_1_1
 {
@@ -11,6 +12,7 @@ namespace Grafy_1_1
     {
         // Brzydkoszybka enkapsulacja
         public int[,] IncidenceArray;
+        public AdjacencyList adjacencyList;
 
         public IncidenceMatrix(AdjacencyMatrix sourceMatrix)
         {
@@ -55,7 +57,10 @@ namespace Grafy_1_1
             {
                 for (int j = 0; j < IncidenceArray.GetLength(1); j++)
                 {
-                    myString += IncidenceArray[i, j].ToString() + "  ";
+                    if (IncidenceArray[i, j] < 0)
+                        myString += IncidenceArray[i, j].ToString() + "  ";
+                    else
+                        myString += " " + IncidenceArray[i, j].ToString() + "  ";
                 }
                 myString += "\n";
             }
@@ -63,13 +68,55 @@ namespace Grafy_1_1
             TextBlock myBlock = new TextBlock();
             myBlock.Text = myString;
             myBlock.FontSize = 16;
+            myBlock.FontFamily = new FontFamily("Lucida Console");
             StackPanelForDisplayingIncidenceMatrix.Children.Add(myBlock);
 
             // Nowa lista sąsiedztwa
-            AdjacencyList adjacencyList = new AdjacencyList(this);
+            adjacencyList = new AdjacencyList(this);
             adjacencyList.Display(StackPanelForDisplayingAdjacencylist);
 
         }
 
+        internal void Preview(StackPanel StackPanelForPreview)
+        {
+            StackPanelForPreview.Children.Clear();
+
+            string myString = "";
+
+            for (int i = 0; i < IncidenceArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < IncidenceArray.GetLength(1); j++)
+                {
+                    if(IncidenceArray[i, j] < 0)
+                        myString += IncidenceArray[i, j].ToString() + "  ";
+                    else
+                        myString += " " + IncidenceArray[i, j].ToString() + "  ";
+                }
+                myString += "\n";
+            }
+
+            TextBlock titleBlock = new TextBlock();
+            titleBlock.Text = "Macierz incydencji";
+            titleBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            titleBlock.FontSize = 48;
+            titleBlock.FontFamily = new FontFamily("Times New Roman");
+            titleBlock.Margin = new System.Windows.Thickness(0, 20, 0, 50);
+            StackPanelForPreview.Children.Add(titleBlock);
+
+            TextBlock myBlock = new TextBlock();
+            myBlock.Text = myString;
+            myBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            myBlock.FontSize = 16;
+            myBlock.FontFamily = new FontFamily("Lucida Console");
+            StackPanelForPreview.Children.Add(myBlock);
+
+            StackPanelForPreview.Height = titleBlock.Height + myBlock.Height;
+            StackPanelForPreview.Width = titleBlock.Width + myBlock.Width;
+        }
+
+        internal void PreviewAdjacencyList(StackPanel stackPanelForPreview)
+        {
+            adjacencyList.Preview(stackPanelForPreview);
+        }
     }
 }

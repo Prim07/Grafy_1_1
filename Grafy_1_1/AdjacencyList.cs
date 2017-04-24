@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Grafy_1_1
 {
@@ -66,7 +67,43 @@ namespace Grafy_1_1
             TextBlock myBlock = new TextBlock();
             myBlock.Text = myString;
             myBlock.FontSize = 16;
+            myBlock.FontFamily = new FontFamily("Lucida Console");
             StackPanelForDisplayingAdjacencyList.Children.Add(myBlock);
+        }
+
+        internal void Preview(StackPanel StackPanelForPreview)
+        {
+            StackPanelForPreview.Children.Clear();
+
+            string myString = "";
+
+            for (int i = 0; i < ListOfLists.Count; i++)
+            {
+                myString += (i + 1).ToString();
+                for (int j = 0; j < ListOfLists[i].Count; j++)
+                {
+                    myString += " → " + ListOfLists[i][j].ToString();
+                }
+                myString += " ↴\n";
+            }
+
+            TextBlock titleBlock = new TextBlock();
+            titleBlock.Text = "Lista sąsiedztwa";
+            titleBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            titleBlock.FontSize = 48;
+            titleBlock.FontFamily = new FontFamily("Times New Roman");
+            titleBlock.Margin = new System.Windows.Thickness(0, 20, 0, 50);
+            StackPanelForPreview.Children.Add(titleBlock);
+
+            TextBlock myBlock = new TextBlock();
+            myBlock.Text = myString;
+            myBlock.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            myBlock.FontSize = 16;
+            myBlock.FontFamily = new FontFamily("Lucida Console");
+            StackPanelForPreview.Children.Add(myBlock);
+
+            StackPanelForPreview.Height = titleBlock.Height + myBlock.Height;
+            StackPanelForPreview.Width = titleBlock.Width + myBlock.Width;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Grafy_1_1
                 Random r = new Random();
                 int v = Int32.Parse(Number_Of_Vertex.Text);
 
-                AdjacencyMatrix adjacencyMatrix = new AdjacencyMatrix(v);
+                adjacencyMatrix = new AdjacencyMatrix(v);
 
                 for (int i = 0; i < v; i++)
                 {
@@ -98,7 +98,7 @@ namespace Grafy_1_1
                 var num_of_v = Int32.Parse(Num_Of_Vertexes_To_Draw.Text);
                 var num_of_e = Int32.Parse(Num_Of_Edges_To_Draw.Text);
 
-                AdjacencyMatrix adjacencyMatrix = new AdjacencyMatrix(num_of_v);
+                adjacencyMatrix = new AdjacencyMatrix(num_of_v);
 
                 for (int i = 0; i < num_of_v; i++)
                 {
@@ -313,13 +313,36 @@ namespace Grafy_1_1
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+        
 
-
-        // Rowniez sprawdza Num_of_E, nie tylko Num_of_V
-        private void V_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void StackPanelForDisplayingAdjacencyMatrix_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            StackPanelForPreview.Visibility = Visibility.Visible;
+            PreviewScrollViewer.Visibility = Visibility.Visible;
+            adjacencyMatrix.Preview(StackPanelForPreview);
         }
+
+        private void StackPanelForDisplayingIncidenceMatrix_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            StackPanelForPreview.Visibility = Visibility.Visible;
+            PreviewScrollViewer.Visibility = Visibility.Visible;
+            adjacencyMatrix.PreviewIncidence(StackPanelForPreview);
+        }
+
+        private void StackPanelForDisplayingAdjacencylist_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            StackPanelForPreview.Visibility = Visibility.Visible;
+            PreviewScrollViewer.Visibility = Visibility.Visible;
+            adjacencyMatrix.PreviewAdjacencyList(StackPanelForPreview);
+        }
+
+        private void StackPanelForPreview_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel stackPanelForPreview = sender as StackPanel;
+            stackPanelForPreview.Visibility = Visibility.Hidden;
+            PreviewScrollViewer.Visibility = Visibility.Hidden;
+
+        }
+
     }
 }
