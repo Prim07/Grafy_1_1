@@ -90,7 +90,7 @@ namespace Grafy_1_1
                 Num_Of_Edges_To_Draw.Background = Brushes.OrangeRed;
             }
             else if ((Int32.Parse(Num_Of_Vertexes_To_Draw.Text) * Int32.Parse(Num_Of_Vertexes_To_Draw.Text) 
-                        - Int32.Parse(Num_Of_Vertexes_To_Draw.Text)) / 2 <= Int32.Parse(Num_Of_Edges_To_Draw.Text))
+                        - Int32.Parse(Num_Of_Vertexes_To_Draw.Text)) / 2 >= Int32.Parse(Num_Of_Edges_To_Draw.Text))
             {
                 Num_Of_Vertexes_To_Draw.Background = Brushes.White;
                 Num_Of_Edges_To_Draw.Background = Brushes.White;
