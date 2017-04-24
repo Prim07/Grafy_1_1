@@ -317,23 +317,32 @@ namespace Grafy_1_1
 
         private void StackPanelForDisplayingAdjacencyMatrix_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            StackPanelForPreview.Visibility = Visibility.Visible;
-            PreviewScrollViewer.Visibility = Visibility.Visible;
-            adjacencyMatrix.Preview(StackPanelForPreview);
+            if (adjacencyMatrix != null)
+            {
+                StackPanelForPreview.Visibility = Visibility.Visible;
+                PreviewScrollViewer.Visibility = Visibility.Visible;
+                adjacencyMatrix.Preview(StackPanelForPreview);
+            }
         }
 
         private void StackPanelForDisplayingIncidenceMatrix_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            StackPanelForPreview.Visibility = Visibility.Visible;
-            PreviewScrollViewer.Visibility = Visibility.Visible;
-            adjacencyMatrix.PreviewIncidence(StackPanelForPreview);
+            if (adjacencyMatrix != null)
+            {
+                StackPanelForPreview.Visibility = Visibility.Visible;
+                PreviewScrollViewer.Visibility = Visibility.Visible;
+                adjacencyMatrix.PreviewIncidence(StackPanelForPreview);
+            }
         }
 
         private void StackPanelForDisplayingAdjacencylist_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            StackPanelForPreview.Visibility = Visibility.Visible;
-            PreviewScrollViewer.Visibility = Visibility.Visible;
-            adjacencyMatrix.PreviewAdjacencyList(StackPanelForPreview);
+            if (adjacencyMatrix != null)
+            {
+                StackPanelForPreview.Visibility = Visibility.Visible;
+                PreviewScrollViewer.Visibility = Visibility.Visible;
+                adjacencyMatrix.PreviewAdjacencyList(StackPanelForPreview);
+            }
         }
 
         private void StackPanelForPreview_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
