@@ -21,12 +21,13 @@ namespace Grafy_1_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
         //deklaracje wartości publicznych, widoczne w całym programie i w każdej funckji
         private AdjacencyMatrix adjacencyMatrix;
-        public List<ComboBox> ListOfComboBoxes;
+        public List<ComboBox> ListOfLeftComboBoxes;
+        public List<ComboBox> ListOfRightComboBoxes;
         public int LeftComboBoxValue = 0;
-        
+
 
         public MainWindow()
         {
@@ -73,7 +74,7 @@ namespace Grafy_1_1
             {
                 Probability_Of_Edge_Occurence.Background = Brushes.OrangeRed;
             }
-            
+
         }
 
         // Losowanie grafu G(n,l)
@@ -88,14 +89,15 @@ namespace Grafy_1_1
                 Num_Of_Vertexes_To_Draw.Background = Brushes.White;
                 Num_Of_Edges_To_Draw.Background = Brushes.OrangeRed;
             }
-            else if ((Int32.Parse(Num_Of_Edges_To_Draw.Text) * Int32.Parse(Num_Of_Edges_To_Draw.Text) - Int32.Parse(Num_Of_Edges_To_Draw.Text)) / 2 <= Int32.Parse(Num_Of_Vertexes_To_Draw.Text))
+            else if ((Int32.Parse(Num_Of_Edges_To_Draw.Text) * Int32.Parse(Num_Of_Edges_To_Draw.Text) 
+                        - Int32.Parse(Num_Of_Edges_To_Draw.Text)) / 2 <= Int32.Parse(Num_Of_Vertexes_To_Draw.Text))
             {
                 Num_Of_Vertexes_To_Draw.Background = Brushes.White;
                 Num_Of_Edges_To_Draw.Background = Brushes.White;
 
                 var num_of_v = Int32.Parse(Num_Of_Vertexes_To_Draw.Text);
                 var num_of_e = Int32.Parse(Num_Of_Edges_To_Draw.Text);
-                
+
                 AdjacencyMatrix adjacencyMatrix = new AdjacencyMatrix(num_of_v);
 
                 for (int i = 0; i < num_of_v; i++)
@@ -132,21 +134,43 @@ namespace Grafy_1_1
             }
         }
 
-        private void Num_of_E_TextChanged(object sender, TextChangedEventArgs e)
+        private void Num_of_V_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Num_of_V.Text == "")
-                Num_of_V.Text = "0";
+            if (Num_of_V.Text == "")
+                StackPanelWithConnections.Children.Clear();
             else
             {
                 var num_v = Num_of_V.Text;
                 var num_e = Num_of_E.Text;
 
-                if(num_e != "")
-                    GenerateConnections(Int32.Parse(num_v), Int32.Parse(num_e));
+                if (num_e != "")
+                {
+                    if ((Int32.Parse(num_e) * Int32.Parse(num_e) - Int32.Parse(num_e)) / 2 <= Int32.Parse(num_v))
+                    {
+                        GenerateConnections(Int32.Parse(num_v), Int32.Parse(num_e));
+                        Num_of_E.Background = Brushes.White;
+                    }
+                    else
+                        Num_of_E.Background = Brushes.OrangeRed;
+                }
                 else
                     StackPanelWithConnections.Children.Clear();
 
             }
+        }
+        
+        private void Num_of_E_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Num_of_E.Background = Brushes.White;
+            Num_of_V.Text = "";
+            if (Num_of_E.Text == "")
+            {
+                Num_of_V.Text = "";
+                Num_of_V.IsEnabled = false;
+                StackPanelWithConnections.Children.Clear();
+            }
+            else
+                Num_of_V.IsEnabled = true;
         }
 
         private void GenerateConnections(int num_v, int num_e)
@@ -166,7 +190,8 @@ namespace Grafy_1_1
 
             int j = 0;
 
-            ListOfComboBoxes = new List<ComboBox>();
+            ListOfLeftComboBoxes = new List<ComboBox>();
+            ListOfRightComboBoxes = new List<ComboBox>();
 
             for (int i = 0; i < num_e; i++)
             {
@@ -183,6 +208,7 @@ namespace Grafy_1_1
                 ComboBox fromComboBox = new ComboBox();
                 SetComboBox(num_v, fromComboBox);
                 fromComboBox.Tag = j;
+                ListOfRightComboBoxes.Add(fromComboBox);
                 fromComboBox.SelectionChanged += FromComboBox_SelectionChanged;
                 fromComboBox.DropDownOpened += FromComboBox_DropDownOpened;
 
@@ -190,7 +216,7 @@ namespace Grafy_1_1
                 SetComboBox(num_v, toComboBox);
                 toComboBox.Tag = j + 1;
                 toComboBox.IsEnabled = false;
-                ListOfComboBoxes.Add(toComboBox);
+                ListOfLeftComboBoxes.Add(toComboBox);
                 toComboBox.SelectionChanged += ToComboBox_SelectionChanged;
 
 
@@ -228,7 +254,7 @@ namespace Grafy_1_1
                 ComboBoxItem typeItemLeft = (ComboBoxItem)myComboBox.SelectedItem;
                 int previousLeftValue = Int32.Parse(typeItemLeft.Content.ToString());
 
-                var comboBoxRight = ListOfComboBoxes.Find(x => (int)x.Tag == (int)myComboBox.Tag + 1);
+                var comboBoxRight = ListOfLeftComboBoxes.Find(x => (int)x.Tag == (int)myComboBox.Tag + 1);
                 ComboBoxItem typeItemRight = (ComboBoxItem)comboBoxRight.SelectedItem;
                 int previosuRightValue = Int32.Parse(typeItemRight.Content.ToString());
                 
@@ -244,7 +270,11 @@ namespace Grafy_1_1
         {
 
             ComboBox myComboBox = sender as ComboBox;
-            var comboBoxRight = ListOfComboBoxes.Find(x => (int)x.Tag == (int)myComboBox.Tag + 1);
+
+            for(int i = 0; i < ListOfRightComboBoxes.Count; i++)
+                ListOfRightComboBoxes[i].IsEnabled = false;
+
+            var comboBoxRight = ListOfLeftComboBoxes.Find(x => (int)x.Tag == (int)myComboBox.Tag + 1);
 
             comboBoxRight.IsEnabled = true;
             
@@ -258,7 +288,6 @@ namespace Grafy_1_1
         // Jeśli zmienimy wartosc w "połączenie do: "
         private void ToComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             ComboBox myComboBox = sender as ComboBox;
 
             ComboBoxItem typeItem = (ComboBoxItem)myComboBox.SelectedItem;
@@ -269,6 +298,11 @@ namespace Grafy_1_1
             adjacencyMatrix.Display(StackPanelForDisplayingAdjacencyMatrix, MyCanvas, StackPanelForDisplayingIncidenceMatrix, StackPanelForDisplayingAdjacencylist);
 
             myComboBox.IsEnabled = false;
+
+            for (int i = 0; i < ListOfRightComboBoxes.Count; i++)
+            {
+                ListOfRightComboBoxes[i].IsEnabled = true;
+            }
 
         }
         
