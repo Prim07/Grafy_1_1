@@ -28,6 +28,28 @@ namespace Grafy_1_1
             }
         }
 
+        public AdjacencyMatrix(AdjacencyList adjacencyList)
+        {
+            var num_of_v = adjacencyList.ListOfLists.Count;
+
+            AdjacencyArray = new int[num_of_v, num_of_v];
+
+            for (int i = 0; i < num_of_v; i++)
+                for (int j = 0; j < num_of_v; j++)
+                    AdjacencyArray[i, j] = 0;
+
+
+            for (int i = 0; i < num_of_v; i++)
+            {
+                for (int j = 0; j < adjacencyList.ListOfLists[i].Count; j++)
+                {
+                    AdjacencyArray[i, adjacencyList.ListOfLists[i][j] - 1] = 1;
+                    AdjacencyArray[adjacencyList.ListOfLists[i][j] - 1, i] = 1;
+                }
+            }
+                
+        }
+
         // Wyświetlanie macierzy na stack panelu 
         // Canvas przekazany, by móc wywołać funkcję DrawGraph(Canvas) później
         // Drugi StackPanel przekazany, by móc później wyświetlić macierz incydencji

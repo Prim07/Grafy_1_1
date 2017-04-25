@@ -12,7 +12,6 @@ namespace Grafy_1_1
     {
         //Brzydkoszybka enkapsulacja
         //n list gdzie n to liczba wierzchołków
-        //public List<int>[] ArrayOfLists;
         public List<List<int>> ListOfLists;
 
         public AdjacencyList(IncidenceMatrix sourceMatrix)

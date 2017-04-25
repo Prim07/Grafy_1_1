@@ -27,6 +27,7 @@
                 <TextBlock VerticalAlignment="Center" Text=" i krawędzi:" Width="65" Height="15"/>
                 <TextBox x:Name="Num_Of_Edges_To_Draw" Width="35" Height="20" PreviewTextInput="Num_of_V_PreviewTextInput" Text="4" />
             </StackPanel>
+            <Button Visibility="Collapsed" Name="AdjacencyList_to_AdjacencyMatrix" Content="Konwertuj Listę Sąsiedztwa na Macierz Sąsiedztwa" Margin="10,30,10,0" Height="46" Click="AdjacencyList_to_AdjacencyMatrix_Click" />
             <TextBlock Width="280" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16"  Margin="10,30,0,0" Height="21">
                 Koduj graf
             </TextBlock>

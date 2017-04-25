@@ -307,7 +307,7 @@ namespace Grafy_1_1
         }
         
         
-        // Rowniez sprawdza Num_of_E, nie tylko Num_of_V
+        // Rowniez sprawdza Num_of_E i inne, nie tylko Num_of_V
         private void Num_of_V_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -347,11 +347,21 @@ namespace Grafy_1_1
 
         private void StackPanelForPreview_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            StackPanel stackPanelForPreview = sender as StackPanel;
-            stackPanelForPreview.Visibility = Visibility.Hidden;
+            StackPanelForPreview.Visibility = Visibility.Hidden;
             PreviewScrollViewer.Visibility = Visibility.Hidden;
 
         }
 
+        private void AdjacencyList_to_AdjacencyMatrix_Click(object sender, RoutedEventArgs e)
+        {
+            if (adjacencyMatrix != null)
+            {
+                IncidenceMatrix tmpIncendenceMatrix = new IncidenceMatrix(adjacencyMatrix);
+                AdjacencyList tmpAdjacencyList = new AdjacencyList(tmpIncendenceMatrix);
+                AdjacencyMatrix convertedAdjacencyMatrix = new AdjacencyMatrix(tmpAdjacencyList);
+
+                convertedAdjacencyMatrix.Display(StackPanelForDisplayingAdjacencyMatrix, MyCanvas, StackPanelForDisplayingIncidenceMatrix, StackPanelForDisplayingAdjacencylist);
+            }
+        }
     }
 }
